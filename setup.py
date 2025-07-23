@@ -242,7 +242,25 @@ environments = {
         # The Magent2 package is broken for now
         #'magent2==0.3.2',
     ],
+    'metta-deps': [
+        # Build dependencies for metta-mettagrid (needed for --no-build-isolation)
+        'scikit-build-core>=0.10.0',
+        'pybind11==2.10.4',
+        'cmake>=3.22',
+        'ninja',
+        'wheel',
+        'numpy<2',
+    ],
     'metta': [
+        # Build dependencies for metta-mettagrid (needed for --no-build-isolation)
+        'scikit-build-core>=0.10.0',
+        'pybind11==2.10.4',
+        'cmake>=3.22',
+        'ninja',
+        'wheel',
+        'numpy<2',
+        # Install metta-mettagrid directly from the subdirectory
+        'metta-mettagrid @ git+https://github.com/metta-ai/metta.git@richard-alt-versions#subdirectory=mettagrid',
         f'gym=={GYM_VERSION}',
         f'gymnasium=={GYMNASIUM_VERSION}',
         'omegaconf',
