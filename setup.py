@@ -253,8 +253,7 @@ environments = {
     ],
     'metta': [
         'pufferlib[metta-deps]',
-        # Install metta and all its subpackages from the root
-        'metta @ git+https://github.com/metta-ai/metta.git@richard-alt-versions',
+        'metta-mettagrid @ git+https://github.com/metta-ai/metta.git@richard-alt-versions#subdirectory=mettagrid',
         f'gym=={GYM_VERSION}',
         f'gymnasium=={GYMNASIUM_VERSION}',
         'omegaconf',
@@ -516,6 +515,9 @@ setup(
         'common': common,
         **environments,
     },
+    dependency_links=[
+        'metta-common @ git+https://github.com/metta-ai/metta.git@richard-alt-versions#subdirectory=common',
+    ],
     ext_modules = c_extensions + torch_extensions,
     cmdclass={
         "build_ext": BuildExt,
