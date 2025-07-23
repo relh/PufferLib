@@ -247,7 +247,7 @@ environments = {
         #'magent2==0.3.2',
     ],
     'metta': [
-        # Install metta-mettagrid which now properly declares its dependencies
+        # Install metta-mettagrid which now handles its own dependencies via metta-bootstrap
         'metta-mettagrid @ git+https://github.com/metta-ai/metta.git@richard-alt-versions#subdirectory=mettagrid',
         # Runtime dependencies
         f'gym=={GYM_VERSION}',
