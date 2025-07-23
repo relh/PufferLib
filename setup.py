@@ -251,9 +251,11 @@ environments = {
         'wheel',
         'numpy<2',
     ],
-    'metta': [
-        'pufferlib[metta-deps]',
+    'metta-common': [
         'metta-common @ git+https://github.com/metta-ai/metta.git@richard-alt-versions#subdirectory=common',
+    ],
+    'metta': [
+        'pufferlib[metta-deps,metta-common]',
         'metta-mettagrid @ git+https://github.com/metta-ai/metta.git@richard-alt-versions#subdirectory=mettagrid',
         f'gym=={GYM_VERSION}',
         f'gymnasium=={GYMNASIUM_VERSION}',
