@@ -255,6 +255,9 @@ environments = {
         'wheel',
         'numpy<2',
     ],
+    'metta-common': [
+        'metta-common @ git+https://github.com/metta-ai/metta.git@richard-alt-versions#subdirectory=common',
+    ],
     'metta': [
         # First, install all build dependencies directly
         'scikit-build-core>=0.10.0',
