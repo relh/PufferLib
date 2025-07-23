@@ -25,8 +25,12 @@ import zipfile
 import tarfile
 import platform
 import shutil
+import subprocess
+import sys
 
 from setuptools.command.build_ext import build_ext
+from setuptools.command.install import install
+from setuptools.command.develop import develop
 from torch.utils import cpp_extension
 from torch.utils.cpp_extension import (
     CppExtension,
@@ -251,12 +255,19 @@ environments = {
         'wheel',
         'numpy<2',
     ],
-    'metta-common': [
-        'metta-common @ git+https://github.com/metta-ai/metta.git@richard-alt-versions#subdirectory=common',
-    ],
     'metta': [
-        'pufferlib[metta-deps,metta-common]',
+        # First, install all build dependencies directly
+        'scikit-build-core>=0.10.0',
+        'pybind11==2.10.4',
+        'cmake>=3.22',
+        'ninja',
+        'wheel',
+        'numpy<2',
+        # Then install metta-common
+        'metta-common @ git+https://github.com/metta-ai/metta.git@richard-alt-versions#subdirectory=common',
+        # Finally install metta-mettagrid which depends on the above
         'metta-mettagrid @ git+https://github.com/metta-ai/metta.git@richard-alt-versions#subdirectory=mettagrid',
+        # Runtime dependencies
         f'gym=={GYM_VERSION}',
         f'gymnasium=={GYMNASIUM_VERSION}',
         'omegaconf',
