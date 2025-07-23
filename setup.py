@@ -252,7 +252,7 @@ environments = {
         'numpy<2',
     ],
     'metta': [
-        'pufferlib[metta-deps]',
+        'pufferlib[metta-deps]', # please preserve the metta-deps to metta 1-2 punch because of --no-build_isolation
         # Install metta-mettagrid directly from the subdirectory
         'metta-mettagrid @ git+https://github.com/metta-ai/metta.git@richard-alt-versions#subdirectory=mettagrid',
         'metta-common @ git+https://github.com/metta-ai/metta.git@richard-alt-versions#subdirectory=common',
