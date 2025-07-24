@@ -25,12 +25,8 @@ import zipfile
 import tarfile
 import platform
 import shutil
-import subprocess
-import sys
 
 from setuptools.command.build_ext import build_ext
-from setuptools.command.install import install
-from setuptools.command.develop import develop
 from torch.utils import cpp_extension
 from torch.utils.cpp_extension import (
     CppExtension,
@@ -247,21 +243,14 @@ environments = {
         #'magent2==0.3.2',
     ],
     'metta': [
-        # metta packages with C++ extensions
-        # Build dependencies (scikit-build-core, pybind11) are now in PufferLib core
-        # to support --no-build-isolation. scikit-build-core will auto-install cmake/ninja.
-        
-        # Install metta-common first (provides additional utilities)
-        'metta-common @ git+https://github.com/metta-ai/metta.git@richard-alt-versions#subdirectory=common',
-        # Install metta-mettagrid which now handles its own dependencies
-        'metta-mettagrid @ git+https://github.com/metta-ai/metta.git@richard-alt-versions#subdirectory=mettagrid',
-        # Runtime dependencies
         f'gym=={GYM_VERSION}',
         f'gymnasium=={GYMNASIUM_VERSION}',
         'omegaconf',
         'hydra-core',
         'duckdb',
         'raylib>=5.5.0',  # Python bindings for raylib graphics library
+        'metta-common @ git+https://github.com/metta-ai/metta.git@richard-alt-versions#subdirectory=common',
+        'metta-mettagrid @ git+https://github.com/metta-ai/metta.git@richard-alt-versions#subdirectory=mettagrid',
     ],
     'microrts': [
         f'gym=={GYM_VERSION}',
@@ -485,10 +474,8 @@ install_requires = [
     f'pettingzoo<={PETTINGZOO_VERSION}',
     'shimmy[gym-v21]',
     'setuptools',
-    # Minimal build dependencies for metta packages (when using --no-build-isolation)
-    'scikit-build-core>=0.10.0',  # Build backend for metta-mettagrid
-    'pybind11==2.10.4',           # C++ bindings (specific version for metta)
-    'wheel',                      # Wheel building support
+    'scikit-build-core>=0.10.0',  
+    'pybind11==2.10.4',           
 ]
 
 if not NO_TRAIN:
@@ -522,7 +509,6 @@ setup(
         'common': common,
         **environments,
     },
-    dependency_links=[],
     ext_modules = c_extensions + torch_extensions,
     cmdclass={
         "build_ext": BuildExt,
