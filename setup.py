@@ -247,11 +247,11 @@ environments = {
         #'magent2==0.3.2',
     ],
     'metta': [
-        # Note: When using --no-build-isolation, install metta-deps first:
-        # pip install -e .[metta-deps] --no-build-isolation
-        # pip install -e .[metta] --no-build-isolation
+        # metta packages with C++ extensions
+        # Build dependencies (scikit-build-core, pybind11) are now in PufferLib core
+        # to support --no-build-isolation. scikit-build-core will auto-install cmake/ninja.
         
-        # Install metta-common first (provides build tools for mettagrid)
+        # Install metta-common first (provides additional utilities)
         'metta-common @ git+https://github.com/metta-ai/metta.git@richard-alt-versions#subdirectory=common',
         # Install metta-mettagrid which now handles its own dependencies
         'metta-mettagrid @ git+https://github.com/metta-ai/metta.git@richard-alt-versions#subdirectory=mettagrid',
@@ -262,16 +262,6 @@ environments = {
         'hydra-core',
         'duckdb',
         'raylib>=5.5.0',  # Python bindings for raylib graphics library
-    ],
-    'metta-deps': [
-        # Build dependencies needed for metta packages when using --no-build-isolation
-        # Install this first if using --no-build-isolation: pip install -e .[metta-deps] --no-build-isolation
-        'scikit-build-core>=0.10.0',
-        'pybind11==2.10.4',
-        'cmake>=3.22',
-        'ninja',
-        'wheel',
-        'numpy<2',
     ],
     'microrts': [
         f'gym=={GYM_VERSION}',
@@ -494,7 +484,11 @@ install_requires = [
     f'gymnasium<={GYMNASIUM_VERSION}',
     f'pettingzoo<={PETTINGZOO_VERSION}',
     'shimmy[gym-v21]',
-    'setuptools'
+    'setuptools',
+    # Minimal build dependencies for metta packages (when using --no-build-isolation)
+    'scikit-build-core>=0.10.0',  # Build backend for metta-mettagrid
+    'pybind11==2.10.4',           # C++ bindings (specific version for metta)
+    'wheel',                      # Wheel building support
 ]
 
 if not NO_TRAIN:
