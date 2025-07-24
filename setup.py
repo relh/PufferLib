@@ -247,15 +247,9 @@ environments = {
         #'magent2==0.3.2',
     ],
     'metta': [
-        # Build dependencies needed for metta packages when using --no-build-isolation
-        'scikit-build-core>=0.10.0',
-        'pybind11==2.10.4',
-        'cmake>=3.22',
-        'ninja',
-        'wheel',
         # Install metta-common first (required by metta-mettagrid)
         'metta-common @ git+https://github.com/metta-ai/metta.git@richard-alt-versions#subdirectory=common',
-        # Install metta-mettagrid which now handles its own dependencies via metta-bootstrap
+        # Install metta-mettagrid which now handles its own dependencies
         'metta-mettagrid @ git+https://github.com/metta-ai/metta.git@richard-alt-versions#subdirectory=mettagrid',
         # Runtime dependencies
         f'gym=={GYM_VERSION}',
