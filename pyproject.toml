@@ -104,7 +104,7 @@ kinetix = [
 magent = [
     'gym==0.23',
     'gymnasium==0.29.1',
-    'pettingzoo==1.19.0',
+    'pettingzoo==1.24.1',  # Updated to match metta requirements
     'magent==0.2.4',
     # The Magent2 package is broken for now
     #'magent2==0.3.2',
@@ -129,7 +129,7 @@ microrts = [
 ]
 
 minerl = [
-    'gym==0.17.0',
+    'gym==0.23',  # Updated from 0.17.0 to match other extras
     'gymnasium==0.29.1',
     #'git+https://github.com/minerllabs/minerl'
     # Compatiblity warning with urllib3 and chardet
@@ -169,7 +169,7 @@ nmmo = [
 open_spiel = [
     'gym==0.23',
     'gymnasium==0.29.1',
-    'pettingzoo==1.19.0',
+    'pettingzoo==1.24.1',  # Updated to match metta requirements
     'open_spiel==1.3',
 ]
 
