@@ -13,6 +13,18 @@ import platform
 import shutil
 
 from setuptools.command.build_ext import build_ext
+
+try:
+    import torch  # noqa: F401 - build-time presence check
+except ModuleNotFoundError as exc:
+    raise ModuleNotFoundError(
+        "PufferLib requires PyTorch to be available during installation so the "
+        "compute_puff_advantage extension can compile. If pip build isolation is "
+        "enabled, point PIP_EXTRA_INDEX_URL or TORCH_INDEX_URL to the appropriate "
+        "PyTorch wheel index (e.g. https://download.pytorch.org/whl/cu121) before "
+        "installing."
+    ) from exc
+
 from torch.utils import cpp_extension
 from torch.utils.cpp_extension import (
     CppExtension,
