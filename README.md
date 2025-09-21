@@ -21,3 +21,21 @@ All of our documentation is hosted at [puffer.ai](https://puffer.ai "PufferLib D
    <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=pufferai/pufferlib&type=Date" />
  </picture>
 </a>
+
+## Optional: building with newer CUDA toolkits
+
+PyTorch wheels are published for CUDA 12.x by default. If you need to compile
+PufferLib against a newer toolkit (for example CUDA 13.0 on sm_120 hardware),
+you can generate a local wrapper that masquerades as CUDA 12.x while invoking
+your desired toolkit:
+
+```bash
+./scripts/setup_cuda_wrapper.sh
+export CUDA_HOME=$(pwd)/build/cuda-wrapper
+export FORCE_CUDA=1
+# Optionally export TORCH_CUDA_ARCH_LIST=12.0 (or another sm target)
+pip wheel . --no-build-isolation
+```
+
+Nothing changes for standard installs—the wrapper is only required if you invoke
+these commands explicitly.
